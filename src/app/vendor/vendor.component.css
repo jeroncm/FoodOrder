@@ -1,0 +1,18 @@
+.login-dark {
+  height: 1000px;
+  background: #111111
+    url(https://images.unsplash.com/photo-1532978379173-523e16f371f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+  background-size: cover;
+  position: relative;
+}
+
+h2 {
+  color: #3498db;
+}
+td {
+  color: #3498db;
+}
+
+tr {
+  color: #3498db;
+}

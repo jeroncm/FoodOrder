@@ -1,0 +1,226 @@
+<div class="bg-img ">
+  <div class="container box">
+    <h2>Vendor Registration</h2>
+    <h3><p>Please Enter Following Details :</p></h3>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-lg-12">
+          <input
+            type="text"
+            class="form-control"
+            maxlength="15"
+            [formControl]="regNo"
+            id="regNo"
+            name="regNo"
+            placeholder="Registration Number"
+            required
+          />
+
+          <div *ngIf="regNo.invalid && (regNo.touched || regNo.dirty)">
+            <small *ngIf="regNo.errors.required"
+              >Registration Number is required</small
+            >
+            <small *ngIf="regNo.errors.pattern"
+              >Registration Number shouldn't contain alphabets</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6  text">
+          <input
+            type="text"
+            class="form-control"
+            maxlength="15"
+            [formControl]="address"
+            id="address"
+            name="address"
+            placeholder="Address"
+            required
+          />
+          <div *ngIf="address.invalid && (address.touched || address.dirty)">
+            <small *ngIf="address.errors.required"
+              >Address field is required</small
+            >
+          </div>
+        </div>
+
+        <div class="col-md-6 text">
+          <input
+            id="country"
+            type="text"
+            [formControl]="country"
+            placeholder="Countryr"
+            class="form-control"
+          />
+          <div *ngIf="country.invalid && (country.touched || country.dirty)">
+            <small *ngIf="country.errors.required"
+              >country field is required</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            id="state"
+            type="text"
+            [formControl]="state"
+            placeholder="state"
+            class="form-control"
+          />
+          <div *ngIf="state.invalid && (state.touched || state.dirty)">
+            <small *ngIf="state.errors.required">state field is required</small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <input
+            id="email"
+            type="text"
+            [formControl]="email"
+            placeholder="email"
+            class="form-control"
+          />
+          <div *ngIf="email.invalid && (email.touched || email.dirty)">
+            <small *ngIf="email.errors.required">email field is required</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            id="contactNumber"
+            type="text"
+            [formControl]="contactNumber"
+            placeholder="contactNumber"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              contactNumber.invalid &&
+              (contactNumber.touched || contactNumber.dirty)
+            "
+          >
+            <small *ngIf="contactNumber.errors.required"
+              >contactNumber field is required</small
+            >
+            <small *ngIf="contactNumber.errors.pattern"
+              >Registration Number shouldn't contain alphabets</small
+            >
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <input
+            id="website"
+            type="text"
+            [formControl]="website"
+            placeholder="website"
+            class="form-control"
+          />
+          <div *ngIf="website.invalid && (website.touched || website.dirty)">
+            <small *ngIf="website.errors.required"
+              >website field is required</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            id="certIssueDate"
+            type="text"
+            [formControl]="certIssueDate"
+            placeholder="certIssueDate"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              certIssueDate.invalid &&
+              (certIssueDate.touched || certIssueDate.dirty)
+            "
+          >
+            <small *ngIf="certIssueDate.errors.required"
+              >certIssueDate field is required</small
+            >
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <input
+            id="certValidDate"
+            type="text"
+            [formControl]="certValidDate"
+            placeholder="certValidDate"
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              certValidDate.invalid &&
+              (certValidDate.touched || certValidDate.dirty)
+            "
+          >
+            <small *ngIf="certValidDate.errors.required"
+              >certValidDate field is required</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            id="yearEstd"
+            type="text"
+            [formControl]="yearEstd"
+            placeholder="yearEstd"
+            class="form-control"
+          />
+          <div *ngIf="yearEstd.invalid && (yearEstd.touched || yearEstd.dirty)">
+            <small *ngIf="yearEstd.errors.required"
+              >yearEstd field is required</small
+            >
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <input
+            id="service"
+            type="text"
+            [formControl]="service"
+            placeholder="service"
+            class="form-control"
+          />
+          <div *ngIf="service.invalid && (service.touched || service.dirty)">
+            <small *ngIf="service.errors.required"
+              >service field is required</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <input
+            type="submit"
+            [disabled]="!userForm.valid"
+            class="btn btn-primary btn-block"
+          />
+        </div>
+        <div class="col-lg-12">
+          <button type="reset" id="reset" class="btn btn-primary btn-block">
+            Clear all
+          </button>
+        </div>
+      </div>
+
+      <a routerLink="/vendor">Cancel</a>
+    </form>
+  </div>
+</div>

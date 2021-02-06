@@ -1,0 +1,772 @@
+<nav class="navbar navbar-dark navbar-expand-sm">
+  <a routerLink="/home" class="navbar-brand">
+    <span id="navbar-title"><h5>PAY.UP</h5></span>
+  </a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#list-navbar-link"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="list-navbar-link" class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <i class="fa fa-user-circle-o" style="font-size:34px;color:white"></i>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">
+          <h5>{{ name }}</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/pay"> <h5>Bills</h5></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="logout()"><h5>Logout</h5></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row pt-5 pb-5">
+    <div class="col-12">
+      <div class="paymentCont">
+        <div class="headingWrap text-center">
+          <h3 class="headingTop text-center pt-5" id="ice">
+            Select Your Payment Method
+          </h3>
+          <p class="text-center" id="ice">
+            Pay your bills now using PAY.UP secure banking
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="pay">
+      <h5 class="text-center">
+        Payment successful <a routerLink="/pay">Click Here</a> to return to
+        bills
+      </h5>
+    </div>
+  </div>
+  <div class="row pt-3" id="car">
+    <div class="paymentWrap text-center">
+      <div
+        class="btn-group paymentBtnGroup btn-group-justified"
+        data-toggle="buttons"
+      >
+        <div class="col-sm-3">
+          <label class="btn paymentMethod active" (click)="paid(1)">
+            <div class="method visa"></div>
+            <input type="radio" checked />
+          </label>
+        </div>
+        <div class="col-sm-3">
+          <label class="btn paymentMethod" (click)="paid(2)">
+            <div class="method master-card"></div>
+            <input type="radio" />
+          </label>
+        </div>
+        <div class="col-sm-3">
+          <label class="btn paymentMethod" (click)="paid(3)">
+            <div class="method amex"></div>
+            <input type="radio" name="options" />
+          </label>
+        </div>
+        <div class="col-sm-3">
+          <label class="btn paymentMethod" (click)="paid(4)">
+            <div class="method vishwa"></div>
+            <input type="radio" name="options" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5 pt-3">
+    <h2 class="text-center pb-3" id="ice" *ngIf="visa">VISA</h2>
+    <h2 class="text-center pb-3" id="ice" *ngIf="master">MasterCard</h2>
+    <h2 class="text-center pb-3" id="ice" *ngIf="exp">American Express</h2>
+    <h2 class="text-center pb-3" id="ice" *ngIf="paypal">PayPal</h2>
+    <div class="row" *ngIf="visa">
+      <form [formGroup]="userForm">
+        <p>Set Remainder</p>
+        <input
+          type="radio"
+          name="remainder"
+          value="one"
+          class="form-control"
+          formControlName="remainder"
+        />
+        One month<br />
+        <input
+          type="radio"
+          name="remainder"
+          value="two"
+          formControlName="remainder"
+          class="form-control"
+        />
+        two month<br />
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="remain()"
+          id="reset"
+        >
+          PAY
+        </button>
+      </form>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <form
+          [formGroup]="userForm1"
+          accept-charset="UTF-8"
+          action="/"
+          class="require-validation"
+          data-cc-on-file="false"
+          data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj"
+          id="payment-form"
+          method="post"
+        >
+          <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="?" /><input
+              name="_method"
+              type="hidden"
+              value="PUT"
+            /><input
+              name="authenticity_token"
+              type="hidden"
+              value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8="
+            />
+          </div>
+          <div class="form-row">
+            <div class="col-12 form-group required">
+              <label class="control-label" id="ice">Name on Card</label>
+              <input
+                class="form-control"
+                size="4"
+                type="text"
+                id="god"
+                placeholder="XXXXX XXXX"
+                name="card"
+                formControlName="card"
+              />
+              <div *ngIf="card.invalid && (card.touched || card.dirty)">
+                <small *ngIf="card.errors.required"
+                  >Card Name is required</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-12 form-group required">
+              <label class="control-label" id="ice">Number on Card</label>
+              <input
+                class="form-control"
+                size="4"
+                type="text"
+                id="god"
+                placeholder="XXXX XXXX XXXX XXXX"
+                name="namec"
+                formControlName="namec"
+              />
+              <div *ngIf="namec.invalid && (namec.touched || namec.dirty)">
+                <small *ngIf="namec.errors.required"
+                  >Card Number is required</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 form-group cvc required">
+              <label class="control-label" id="ice">CVV</label>
+              <input
+                autocomplete="off"
+                class="form-control card-cvc"
+                placeholder="ex. 311"
+                size="4"
+                type="text"
+                id="god"
+                name="cvv"
+                formControlName="cvv"
+              />
+              <div *ngIf="cvv.invalid && (cvv.touched || cvv.dirty)">
+                <small *ngIf="cvv.errors.required">CVV is required</small>
+              </div>
+            </div>
+            <div class="col-4 form-group expiration required">
+              <label class="control-label" id="ice">Expiration</label>
+              <input
+                class="form-control card-expiry-month"
+                placeholder="MM"
+                size="2"
+                type="text"
+                id="god"
+                name="month"
+                formControlName="month"
+              />
+              <div *ngIf="month.invalid && (month.touched || month.dirty)">
+                <small *ngIf="month.errors.required">Month is required</small>
+              </div>
+            </div>
+            <div class="col-4 form-group expiration required">
+              <label class="control-label"> </label>
+              <input
+                class="form-control card-expiry-year"
+                placeholder="YYYY"
+                size="4"
+                type="text"
+                id="god"
+                name="year"
+                formControlName="year"
+              />
+              <div *ngIf="year.invalid && (year.touched || year.dirty)">
+                <small *ngIf="year.errors.required">Year is required</small>
+              </div>
+            </div>
+          </div>
+          <p>Amount to pay</p>
+          <form [formGroup]="userForm1">
+            <input
+              type="text"
+              id="god"
+              [(ngModel)]="billp.paidAmount"
+              name="paidAmount"
+              class="form-control"
+              placeholder="Amount to pay"
+              formControlName="paidAmount"
+            /><br />
+            <div
+              *ngIf="
+                paidAmount.invalid && (paidAmount.touched || paidAmount.dirty)
+              "
+            >
+              <small *ngIf="paidAmount.errors.required"
+                >Amount to pay is required</small
+              >
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger"
+              [disabled]="!userForm1.valid"
+              (click)="bill()"
+              id="reset"
+            >
+              PAY
+            </button>
+          </form>
+        </form>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+  <div class="row" *ngIf="master">
+    <form [formGroup]="userForm">
+      <p>Set Remainder</p>
+      <input
+        type="radio"
+        name="remainder"
+        value="one"
+        class="form-control"
+        formControlName="remainder"
+      />
+      One month<br />
+      <input
+        type="radio"
+        name="remainder"
+        value="two"
+        formControlName="remainder"
+        class="form-control"
+      />
+      two month<br />
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="remain()"
+        id="reset"
+      >
+        PAY
+      </button>
+    </form>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form
+        [formGroup]="userForm1"
+        accept-charset="UTF-8"
+        action="/"
+        class="require-validation"
+        data-cc-on-file="false"
+        data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj"
+        id="payment-form"
+        method="post"
+      >
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="?" /><input
+            name="_method"
+            type="hidden"
+            value="PUT"
+          /><input
+            name="authenticity_token"
+            type="hidden"
+            value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8="
+          />
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Name on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXXX XXXX"
+              name="card"
+              formControlName="card"
+            />
+            <div *ngIf="card.invalid && (card.touched || card.dirty)">
+              <small *ngIf="card.errors.required">Card Name is required</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Number on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXX XXXX XXXX XXXX"
+              name="namec"
+              formControlName="namec"
+            />
+            <div *ngIf="namec.invalid && (namec.touched || namec.dirty)">
+              <small *ngIf="namec.errors.required"
+                >Card Number is required</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 form-group cvc required">
+            <label class="control-label" id="ice">CVV</label>
+            <input
+              autocomplete="off"
+              class="form-control card-cvc"
+              placeholder="ex. 311"
+              size="4"
+              type="text"
+              id="god"
+              name="cvv"
+              formControlName="cvv"
+            />
+            <div *ngIf="cvv.invalid && (cvv.touched || cvv.dirty)">
+              <small *ngIf="cvv.errors.required">CVV is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label" id="ice">Expiration</label>
+            <input
+              class="form-control card-expiry-month"
+              placeholder="MM"
+              size="2"
+              type="text"
+              id="god"
+              name="month"
+              formControlName="month"
+            />
+            <div *ngIf="month.invalid && (month.touched || month.dirty)">
+              <small *ngIf="month.errors.required">Month is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label"> </label>
+            <input
+              class="form-control card-expiry-year"
+              placeholder="YYYY"
+              size="4"
+              type="text"
+              id="god"
+              name="year"
+              formControlName="year"
+            />
+            <div *ngIf="year.invalid && (year.touched || year.dirty)">
+              <small *ngIf="year.errors.required">Year is required</small>
+            </div>
+          </div>
+        </div>
+        <p>Amount to pay</p>
+        <form [formGroup]="userForm1">
+          <input
+            type="text"
+            id="god"
+            [(ngModel)]="billp.paidAmount"
+            name="paidAmount"
+            class="form-control"
+            placeholder="Amount to pay"
+            formControlName="paidAmount"
+          /><br />
+          <div
+            *ngIf="
+              paidAmount.invalid && (paidAmount.touched || paidAmount.dirty)
+            "
+          >
+            <small *ngIf="paidAmount.errors.required"
+              >Amount to pay is required</small
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [disabled]="!userForm1.valid"
+            (click)="bill()"
+            id="reset"
+          >
+            PAY
+          </button>
+        </form>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row" *ngIf="exp">
+    <form [formGroup]="userForm">
+      <p>Set Remainder</p>
+      <input
+        type="radio"
+        name="remainder"
+        value="one"
+        class="form-control"
+        formControlName="remainder"
+      />
+      One month<br />
+      <input
+        type="radio"
+        name="remainder"
+        value="two"
+        formControlName="remainder"
+        class="form-control"
+      />
+      two month<br />
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="remain()"
+        id="reset"
+      >
+        PAY
+      </button>
+    </form>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form
+        [formGroup]="userForm1"
+        accept-charset="UTF-8"
+        action="/"
+        class="require-validation"
+        data-cc-on-file="false"
+        data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj"
+        id="payment-form"
+        method="post"
+      >
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="?" /><input
+            name="_method"
+            type="hidden"
+            value="PUT"
+          /><input
+            name="authenticity_token"
+            type="hidden"
+            value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8="
+          />
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Name on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXXX XXXX"
+              name="card"
+              formControlName="card"
+            />
+            <div *ngIf="card.invalid && (card.touched || card.dirty)">
+              <small *ngIf="card.errors.required">Card Name is required</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Number on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXX XXXX XXXX XXXX"
+              name="namec"
+              formControlName="namec"
+            />
+            <div *ngIf="namec.invalid && (namec.touched || namec.dirty)">
+              <small *ngIf="namec.errors.required"
+                >Card Number is required</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 form-group cvc required">
+            <label class="control-label" id="ice">CVV</label>
+            <input
+              autocomplete="off"
+              class="form-control card-cvc"
+              placeholder="ex. 311"
+              size="4"
+              type="text"
+              id="god"
+              name="cvv"
+              formControlName="cvv"
+            />
+            <div *ngIf="cvv.invalid && (cvv.touched || cvv.dirty)">
+              <small *ngIf="cvv.errors.required">CVV is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label" id="ice">Expiration</label>
+            <input
+              class="form-control card-expiry-month"
+              placeholder="MM"
+              size="2"
+              type="text"
+              id="god"
+              name="month"
+              formControlName="month"
+            />
+            <div *ngIf="month.invalid && (month.touched || month.dirty)">
+              <small *ngIf="month.errors.required">Month is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label"> </label>
+            <input
+              class="form-control card-expiry-year"
+              placeholder="YYYY"
+              size="4"
+              type="text"
+              id="god"
+              name="year"
+              formControlName="year"
+            />
+            <div *ngIf="year.invalid && (year.touched || year.dirty)">
+              <small *ngIf="year.errors.required">Year is required</small>
+            </div>
+          </div>
+        </div>
+        <p>Amount to pay</p>
+        <form [formGroup]="userForm1">
+          <input
+            type="text"
+            id="god"
+            [(ngModel)]="billp.paidAmount"
+            name="paidAmount"
+            class="form-control"
+            placeholder="Amount to pay"
+            formControlName="paidAmount"
+          /><br />
+          <div
+            *ngIf="
+              paidAmount.invalid && (paidAmount.touched || paidAmount.dirty)
+            "
+          >
+            <small *ngIf="paidAmount.errors.required"
+              >Amount to pay is required</small
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [disabled]="!userForm1.valid"
+            (click)="bill()"
+            id="reset"
+          >
+            PAY
+          </button>
+        </form>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row" *ngIf="paypal">
+    <form [formGroup]="userForm">
+      <p>Set Remainder</p>
+      <input
+        type="radio"
+        name="remainder"
+        value="one"
+        class="form-control"
+        formControlName="remainder"
+      />
+      One month<br />
+      <input
+        type="radio"
+        name="remainder"
+        value="two"
+        formControlName="remainder"
+        class="form-control"
+      />
+      two month<br />
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="remain()"
+        id="reset"
+      >
+        PAY
+      </button>
+    </form>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form
+        [formGroup]="userForm1"
+        accept-charset="UTF-8"
+        action="/"
+        class="require-validation"
+        data-cc-on-file="false"
+        data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj"
+        id="payment-form"
+        method="post"
+      >
+        <div style="margin:0;padding:0;display:inline">
+          <input name="utf8" type="hidden" value="?" /><input
+            name="_method"
+            type="hidden"
+            value="PUT"
+          /><input
+            name="authenticity_token"
+            type="hidden"
+            value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8="
+          />
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Name on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXXX XXXX"
+              name="card"
+              formControlName="card"
+            />
+            <div *ngIf="card.invalid && (card.touched || card.dirty)">
+              <small *ngIf="card.errors.required">Card Name is required</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 form-group required">
+            <label class="control-label" id="ice">Number on Card</label>
+            <input
+              class="form-control"
+              size="4"
+              type="text"
+              id="god"
+              placeholder="XXXX XXXX XXXX XXXX"
+              name="namec"
+              formControlName="namec"
+            />
+            <div *ngIf="namec.invalid && (namec.touched || namec.dirty)">
+              <small *ngIf="namec.errors.required"
+                >Card Number is required</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 form-group cvc required">
+            <label class="control-label" id="ice">CVV</label>
+            <input
+              autocomplete="off"
+              class="form-control card-cvc"
+              placeholder="ex. 311"
+              size="4"
+              type="text"
+              id="god"
+              name="cvv"
+              formControlName="cvv"
+            />
+            <div *ngIf="cvv.invalid && (cvv.touched || cvv.dirty)">
+              <small *ngIf="cvv.errors.required">CVV is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label" id="ice">Expiration</label>
+            <input
+              class="form-control card-expiry-month"
+              placeholder="MM"
+              size="2"
+              type="text"
+              id="god"
+              name="month"
+              formControlName="month"
+            />
+            <div *ngIf="month.invalid && (month.touched || month.dirty)">
+              <small *ngIf="month.errors.required">Month is required</small>
+            </div>
+          </div>
+          <div class="col-4 form-group expiration required">
+            <label class="control-label"> </label>
+            <input
+              class="form-control card-expiry-year"
+              placeholder="YYYY"
+              size="4"
+              type="text"
+              id="god"
+              name="year"
+              formControlName="year"
+            />
+            <div *ngIf="year.invalid && (year.touched || year.dirty)">
+              <small *ngIf="year.errors.required">Year is required</small>
+            </div>
+          </div>
+        </div>
+        <p>Amount to pay</p>
+        <form [formGroup]="userForm1">
+          <input
+            type="text"
+            id="god"
+            [(ngModel)]="billp.paidAmount"
+            name="paidAmount"
+            class="form-control"
+            placeholder="Amount to pay"
+            formControlName="paidAmount"
+          /><br />
+          <div
+            *ngIf="
+              paidAmount.invalid && (paidAmount.touched || paidAmount.dirty)
+            "
+          >
+            <small *ngIf="paidAmount.errors.required"
+              >Amount to pay is required</small
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [disabled]="!userForm1.valid"
+            (click)="bill()"
+            id="reset"
+          >
+            PAY
+          </button>
+        </form>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

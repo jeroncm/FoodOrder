@@ -1,0 +1,143 @@
+<nav class="navbar navbar-dark navbar-expand-sm">
+  <a routerLink="/home" class="navbar-brand">
+    <span id="navbar-title"><h5>PAY.UP</h5></span>
+  </a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#list-navbar-link"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="list-navbar-link" class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <i class="fa fa-user-circle-o" style="font-size:34px;color:white"></i>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">
+          <h5>{{ name }}</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/notification">
+          <h5>Notification</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/transaction">
+          <h5>Transaction</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="redirect()"> <h5>Bills</h5></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="logout()"><h5>Logout</h5></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h4 class="pt-5 pb-5" id="used">Available Service</h4>
+<div class="container">
+  <div class="login-dark">
+    <table
+      class="table table-bordered table-hover table-responsive-lg table-striped table-borderless text-center table-dark "
+    >
+      <thead>
+        <tr>
+          <th class="text-center">Vendor Name</th>
+          <th class="text-center">Service Provided</th>
+          <th class="text-center">Website</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor="let vendor of searchVendor">
+        <tr
+          class="pt-3-half "
+          data-toggle="modal"
+          data-target="#myModal"
+          (click)="view(vendor.vendorId)"
+        >
+          <td class="pt-3-half">{{ vendor.vendorName }}</td>
+          <td class="pt-3-half">{{ vendor.service }}</td>
+          <td class="pt-3-half">{{ vendor.website }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h4 class="pt-5 pb-5" id="used1">Used Service</h4>
+<div class="container">
+  <table
+    class="table table-bordered table-hover table-responsive-lg table-striped table-borderless text-center table-dark "
+  >
+    <thead>
+      <tr>
+        <th class="text-center">Vendor Name</th>
+        <th class="text-center">Service Provided</th>
+        <th class="text-center">Website</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let vendor of pref">
+      <tr
+        class="pt-3-half "
+        data-toggle="modal"
+        data-target="#myModal"
+        (click)="view(vendor.vendorId)"
+      >
+        <td class="pt-3-half">{{ vendor.vendorName }}</td>
+        <td class="pt-3-half">{{ vendor.service }}</td>
+        <td class="pt-3-half">{{ vendor.website }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4 class="modal-title text-center">
+          VENDOR NAME: {{ Vendor.vendorName }}
+        </h4>
+        <br />
+        <p class="mt-1 text-center">SERVICE PROVIDED: {{ Vendor.service }}</p>
+        <p class="text-center">EMAIL: {{ Vendor.email }}</p>
+        <p class="text-center">CONTACT NUMBER: {{ Vendor.contactNumber }}</p>
+        <p class="text-center">WEBSITE: {{ Vendor.website }}</p>
+        <p class="text-center">ADDRESS: {{ Vendor.address }}</p>
+        <p class="text-center">COUNTRY: {{ Vendor.country }}</p>
+        <p class="text-center">EMAIL: {{ Vendor.email }}</p>
+        <p class="text-center">YEAR ESTABLISHED: {{ Vendor.yearEstd }}</p>
+        <form class="pl-5">
+          <input
+            type="text"
+            [(ngModel)]="billp.billNumber"
+            name="billNumber"
+            class="ml-5"
+          />
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="bill(Vendor.vendorId, billp.billNumber)"
+          >
+            ADD
+          </button>
+        </form>
+
+        <div *ngIf="okay">
+          <h5 class="text-center pt-4" id="hop">
+            Bill added Successfully please click
+            <a data-dismiss="modal" (click)="redirect()" id="bill">Bills</a> to
+            view your bills
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

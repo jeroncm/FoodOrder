@@ -1,0 +1,135 @@
+<nav class="navbar navbar-dark navbar-expand-sm">
+  <a routerLink="/home" class="navbar-brand">
+    <span id="navbar-title"><h5>PAY.UP</h5></span>
+  </a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#list-navbar-link"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="list-navbar-link" class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <i class="fa fa-user-circle-o" style="font-size:34px;color:white"></i>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">
+          <h5>{{ name }}</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="logout()"><h5>Logout</h5></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="login-dark pt-5">
+  <h2 class="text-center">Waiting for approval</h2>
+  <table
+    class="table table-bordered table-hover table-responsive-lg table-striped table-borderless text-center table-dark mt-5"
+  >
+    <thead>
+      <tr>
+        <th class="text-center">Vendor Name</th>
+        <th class="text-center">Service Provided</th>
+        <th class="text-center">Registration Number</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Country</th>
+        <th class="text-center">State</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Contact Number</th>
+        <th class="text-center">Website</th>
+        <th class="text-center">Certificate Issue Date</th>
+        <th class="text-center">Certificate Valid Date</th>
+        <th class="text-center">Year Established</th>
+        <th class="text-center">Accept</th>
+        <th class="text-center">Reject</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let vendor of vendor">
+      <tr>
+        <td class="pt-3-half">{{ vendor.vendorName }}</td>
+        <td class="pt-3-half">{{ vendor.service }}</td>
+        <td class="pt-3-half">{{ vendor.regNo }}</td>
+        <td class="pt-3-half">{{ vendor.address }}</td>
+        <td class="pt-3-half">{{ vendor.country }}</td>
+        <td class="pt-3-half">{{ vendor.state }}</td>
+        <td class="pt-3-half">{{ vendor.email }}</td>
+        <td class="pt-3-half">{{ vendor.contactNumber }}</td>
+        <td class="pt-3-half">{{ vendor.website }}</td>
+        <td class="pt-3-half">{{ vendor.certIssueDate }}</td>
+        <td class="pt-3-half">{{ vendor.certValidDate }}</td>
+        <td class="pt-3-half">{{ vendor.yearEstd }}</td>
+        <td class="pt-3-half">
+          <button
+            type="button"
+            class="btn btn-success btn-rounded btn-sm m-0"
+            (click)="accept(vendor)"
+          >
+            Accept
+          </button>
+        </td>
+        <td class="pt-3-half">
+          <button
+            type="button"
+            class="btn btn-danger btn-rounded btn-sm m-0"
+            (click)="reject(vendor)"
+          >
+            Reject
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 class="mt-5">Accepted Services</h2>
+  <table
+    class="table table-bordered table-hover table-responsive-lg table-striped table-borderless text-center table-dark mt-5"
+  >
+    <thead>
+      <tr>
+        <th class="text-center">Vendor Name</th>
+        <th class="text-center">Service Provided</th>
+        <th class="text-center">Registration Number</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Country</th>
+        <th class="text-center">State</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Contact Number</th>
+        <th class="text-center">Website</th>
+        <th class="text-center">Certificate Issue Date</th>
+        <th class="text-center">Certificate Valid Date</th>
+        <th class="text-center">Year Established</th>
+        <th class="text-center">Reject</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let vendor of Acceptedvendor">
+      <tr>
+        <td class="pt-3-half">{{ vendor.vendorName }}</td>
+        <td class="pt-3-half">{{ vendor.service }}</td>
+        <td class="pt-3-half">{{ vendor.regNo }}</td>
+        <td class="pt-3-half">{{ vendor.address }}</td>
+        <td class="pt-3-half">{{ vendor.country }}</td>
+        <td class="pt-3-half">{{ vendor.state }}</td>
+        <td class="pt-3-half">{{ vendor.email }}</td>
+        <td class="pt-3-half">{{ vendor.contactNumber }}</td>
+        <td class="pt-3-half">{{ vendor.website }}</td>
+        <td class="pt-3-half">{{ vendor.certIssueDate }}</td>
+        <td class="pt-3-half">{{ vendor.certValidDate }}</td>
+        <td class="pt-3-half">{{ vendor.yearEstd }}</td>
+        <td class="pt-3-half">
+          <button
+            type="button"
+            class="btn btn-danger btn-rounded btn-sm m-0"
+            (click)="delete(vendor)"
+          >
+            Reject
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

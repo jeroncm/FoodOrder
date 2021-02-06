@@ -1,0 +1,57 @@
+<div class="login-dark">
+  <form #loginForm="ngForm">
+    <h2 class="sr-only">Login Form</h2>
+    <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="firstName"
+        name="firstName"
+        placeholder="Username"
+        required
+        [(ngModel)]="loggeduser.firstName"
+        #firstName="ngModel"
+      />
+    </div>
+
+    <div>
+      <div *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
+        <small *ngIf="firstName.errors.required">Username is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        [(ngModel)]="loggeduser.password"
+        #password="ngModel"
+      />
+    </div>
+
+    <div>
+      <div *ngIf="password.invalid && (password.touched || password.dirty)">
+        <small *ngIf="password.errors.required">Password is required</small>
+      </div>
+    </div>
+    <div class="container " *ngIf="!authenticated">
+      <small class="text-center">USERNAME/PASSWORD IS INCORRECT</small>
+    </div>
+
+    <div class="form-group">
+      <button
+        class="btn btn-primary btn-block"
+        [disabled]="!loginForm.valid"
+        type="submit"
+        (click)="onlogin()"
+      >
+        Log In
+      </button>
+    </div>
+    <a routerLink="/signup" class="forgot">Signup</a>
+  </form>
+</div>

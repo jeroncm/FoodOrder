@@ -1,0 +1,14 @@
+
+<div class="jumbotron">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control w-100"
+      placeholder="Search here......"
+      [(ngModel)]="searchtext"
+      (input)="search()"
+    />
+  </div>
+</div>
+
+<app-user [searchVendor]="searchVendor" [pref]="pref"></app-user>

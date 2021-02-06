@@ -1,0 +1,247 @@
+<body>
+  <div class="bg-img ">
+    <div class="container box">
+      <h2>Registration</h2>
+      <h3><p>Please Enter Following Details :</p></h3>
+
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              maxlength="15"
+              [formControl]="firstName"
+              id="firstName"
+              name="firstName"
+              placeholder="First Name"
+              required
+            />
+
+            <div
+              *ngIf="
+                firstName.invalid && (firstName.touched || firstName.dirty)
+              "
+            >
+              <small *ngIf="firstName.errors.required"
+                >Firstname field is required</small
+              >
+              <small *ngIf="firstName.errors.pattern"
+                >Firstname field shouldnt contain numbers</small
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              maxlength="15"
+              [formControl]="lastName"
+              id="lastName"
+              name="lastName"
+              placeholder="Last Name"
+              required
+            />
+
+            <div
+              *ngIf="lastName.invalid && (lastName.touched || lastName.dirty)"
+            >
+              <small *ngIf="lastName.errors.required"
+                >Lastname field is required</small
+              >
+              <small *ngIf="lastName.errors.pattern"
+                >Lastname field shouldnt contain numbers</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6  text">
+            <input
+              type="text"
+              class="form-control"
+              maxlength="15"
+              [formControl]="age"
+              id="age"
+              name="age"
+              placeholder="Age"
+              required
+            />
+
+            <div *ngIf="age.invalid && (age.touched || age.dirty)">
+              <small *ngIf="age.errors.required">age field is required</small>
+              <small *ngIf="age.errors.pattern"
+                >Age shouldn't contain alphabets</small
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 text">
+            <input
+              id="contactNumber"
+              type="text"
+              [formControl]="contactNumber"
+              placeholder="Contact Number"
+              class="form-control"
+            />
+
+            <div
+              *ngIf="
+                contactNumber.invalid &&
+                (contactNumber.touched || contactNumber.dirty)
+              "
+            >
+              <small *ngIf="contactNumber.errors.required"
+                >Contact number field is required</small
+              >
+              <small *ngIf="contactNumber.errors.pattern"
+                >Contact Number shouldn't contain alphabets</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <input
+              id="panNumber"
+              type="text"
+              [formControl]="panNumber"
+              placeholder="PAN Number"
+              class="form-control"
+            />
+            <div
+              *ngIf="
+                panNumber.invalid && (panNumber.touched || panNumber.dirty)
+              "
+            >
+              <small *ngIf="panNumber.errors.required"
+                >panNumber field is required</small
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <input
+              id="aadhar"
+              type="text"
+              [formControl]="aadhar"
+              placeholder="Aadhar Number"
+              class="form-control"
+            />
+            <div *ngIf="aadhar.invalid && (aadhar.touched || aadhar.dirty)">
+              <small *ngIf="aadhar.errors.required"
+                >aadhar field is required</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 mt-4 text">
+            <div class="form">
+              <label class="form__label">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  [formControl]="gender"
+                  checked
+                />
+                <p>Male</p>
+                <br />
+                <input
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  [formControl]="gender"
+                />
+                <p>Female</p>
+                <br /> </label
+              ><br />
+            </div>
+          </div>
+
+          <div class="col-sm-6 mt-4 text">
+            <div class="form">
+              <label class="form__label">
+                <input
+                  type="radio"
+                  name="role"
+                  value="User"
+                  [formControl]="role"
+                  checked
+                />
+                <p>User</p>
+                <br />
+                <input
+                  type="radio"
+                  name="role"
+                  value="Vendor"
+                  [formControl]="role"
+                />
+                <p>Vendor</p>
+                <br /> </label
+              ><br />
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md-6  text">
+            <input
+              id="password"
+              type="password"
+              [formControl]="password"
+              placeholder="Enter password"
+              class="form-control"
+            />
+            <div
+              *ngIf="password.invalid && (password.touched || password.dirty)"
+            >
+              <small *ngIf="password.errors.required"
+                >Password field is required</small
+              >
+            </div>
+          </div>
+          <div class="col-md-6  text">
+            <input
+              id="password"
+              type="password"
+              placeholder="Confirm Password"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <input
+              type="submit"
+              [disabled]="!userForm.valid"
+              class="btn btn-primary btn-block"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="reset" id="reset" class="btn btn-primary btn-block">
+              Clear all
+            </button>
+          </div>
+          <div class=" col-md-6">
+            <button
+              type="button"
+              id="reset"
+              class="btn btn-primary btn-block"
+              routerLink="/login"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

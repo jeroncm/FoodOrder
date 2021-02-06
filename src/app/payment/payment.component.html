@@ -1,0 +1,66 @@
+<nav class="navbar navbar-dark navbar-expand-sm">
+  <a routerLink="/home" class="navbar-brand">
+    <span id="navbar-title"><h5>PAY.UP</h5></span>
+  </a>
+  <button
+    type="button"
+    class="navbar-toggler"
+    data-toggle="collapse"
+    data-target="#list-navbar-link"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="list-navbar-link" class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <i class="fa fa-user-circle-o" style="font-size:34px;color:white"></i>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">
+          <h5>{{ name }}</h5></a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/search-user">
+          <h5>User</h5></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="logout()"><h5>Logout</h5></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h4 id="pen" class="pt-5">Pending Bills</h4>
+<div class="container">
+  <table
+    class="table table-bordered table-hover table-responsive-lg table-striped table-borderless text-center table-dark pt-5"
+  >
+    <thead>
+      <tr>
+        <th class="text-center">Bill Number</th>
+        <th class="text-center">Amount To Pay</th>
+        <th class="text-center">Remaining amount</th>
+        <th class="text-center">Pay</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let vendor of bill1">
+      <tr class="pt-3-half ">
+        <td class="pt-3-half">{{ vendor.billNumber }}</td>
+        <td class="pt-3-half">{{ vendor.amountPay }}</td>
+        <td class="pt-3-half">{{ vendor.pendingAmt }}</td>
+        <td class="pt-3-half">
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="bill(vendor.vendorId, vendor.billNumber)"
+          >
+            Pay
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

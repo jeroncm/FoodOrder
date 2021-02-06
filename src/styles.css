@@ -1,0 +1,16 @@
+body {
+  height: 1000px;
+  background: #111111
+    url(https://images.unsplash.com/photo-1532978379173-523e16f371f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+  background-size: cover;
+  position: relative;
+}
+
+.jumbotron {
+  background-image: url("https://images.unsplash.com/photo-1496172770653-8045da186b34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  min-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}

@@ -1,0 +1,98 @@
+.wrapper {
+  background-color: transparent;
+}
+
+.section.section-plain {
+  background: none;
+}
+
+.section-header h1 {
+  letter-spacing: 0.1em;
+  font-weight: 100;
+  font-size: 6em;
+  font-family: "Slim-Joe";
+  text-transform: uppercase;
+  text-shadow: -2px 2px 0px rgba(0, 0, 0, 0.3), -2px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+  margin: 30px 0 15px;
+  font-size: 60%;
+}
+
+.separator-container {
+  text-align: center;
+  position: relative;
+}
+.separator-container .separator {
+  color: #aaa9ad;
+  margin: 0 auto 1em;
+  width: 11em;
+}
+.separator-container .separator.line-separator:before,
+.separator-container .separator.line-separator:after {
+  display: block;
+  width: 40%;
+  content: " ";
+  margin-top: 14px;
+  border: 1px solid #aaa9ad;
+}
+.separator-container .separator.line-separator:before {
+  float: left;
+}
+.separator-container .separator.line-separator:after {
+  float: right;
+}
+
+.section-first h1 {
+  font-size: 6em;
+}
+
+.section-first p {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 1em 0 0.5em;
+}
+
+.section-first h5 {
+  font-size: 1.2em;
+  margin: 0 auto 0.5em;
+  line-height: 1.5;
+  letter-spacing: 0.125;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+a:link {
+  text-decoration: none;
+  color: #aaa9ad;
+}
+a:hover {
+  text-decoration: none;
+  color: rgb(204, 199, 122);
+}
+.section-first h4 {
+  font-size: 1.7em;
+  margin: 0 auto 0.5em;
+  line-height: 1.5;
+  letter-spacing: 0.125;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.container {
+  color: #aaa9ad;
+}
+
+.west {
+  margin-top: 8%;
+  margin-left: 27%;
+}
+
+.home {
+  margin-top: 23%;
+  text-align: center;
+}

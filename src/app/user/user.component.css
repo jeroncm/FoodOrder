@@ -1,0 +1,27 @@
+.modal-body {
+  background-color: rgb(47, 47, 47);
+}
+
+h4 {
+  color: #3498db;
+}
+
+#hop {
+  color: green;
+}
+
+#bill {
+  color: black;
+  text-decoration: underline;
+}
+
+p {
+  color: #3498db;
+}
+
+#used {
+  padding-left: 46%;
+}
+#used1 {
+  padding-left: 47%;
+}
